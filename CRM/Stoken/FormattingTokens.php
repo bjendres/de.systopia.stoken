@@ -28,6 +28,7 @@ class CRM_Stoken_FormattingTokens {
     $tokens['address']['address.supplemental_address_1_br'] = E::ts('Supplemental Address 1 (with HTML line break)');
     $tokens['address']['address.supplemental_address_2_nl'] = E::ts('Supplemental Address 2 (with line break)');
     $tokens['address']['address.supplemental_address_2_br'] = E::ts('Supplemental Address 2 (with HTML line break)');
+    $tokens['address']['address.addressee_indented'] = E::ts('Indented Addressee');
   }
 
   /**
@@ -41,7 +42,7 @@ class CRM_Stoken_FormattingTokens {
    * @see https://docs.civicrm.org/dev/en/master/hooks/hook_civicrm_tokenValues
    */
   public static function tokenValues(&$values, $cids, $job = null, $tokens = array(), $context = null) {
-    $mytokens = array('supplemental_address_1_nl', 'supplemental_address_1_br', 'supplemental_address_2_nl', 'supplemental_address_2_br');
+    $mytokens = array('addressee_indented', 'supplemental_address_1_nl', 'supplemental_address_1_br', 'supplemental_address_2_nl', 'supplemental_address_2_br');
     if (isset($tokens['address']) && is_array($tokens['address'])) {
       $my_used_tokens = array_intersect($tokens['address'], $mytokens);
       if (empty($my_used_tokens)) {
@@ -63,6 +64,8 @@ class CRM_Stoken_FormattingTokens {
           $values[$cid]['address.supplemental_address_2_nl'] = $entry['supplemental_address_2'] . "\n";
           $values[$cid]['address.supplemental_address_2_br'] = $entry['supplemental_address_2'] . "<br/>";
         }
+        $values[$cid]['address.addressee_indented'] = "<span style=\"padding-left: 50px; text-indent: -50px;\">Superlanger Name von einer superlangen Organisation die ganz lang ist</span>";
+
       }
     }
   }

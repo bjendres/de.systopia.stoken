@@ -46,6 +46,9 @@ function stoken_civicrm_tokenValues(&$values, $cids, $job = null, $tokens = arra
  */
 function stoken_civicrm_config(&$config) {
   _stoken_civix_civicrm_config($config);
+
+  $smarty = CRM_Core_Smarty::singleton();
+  array_push($smarty->plugins_dir, __DIR__ . '/smarty-plugins');
 }
 
 /**
